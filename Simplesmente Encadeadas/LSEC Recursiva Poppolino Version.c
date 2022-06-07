@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct ptr{
+	int cont,valor;
+	struct ptr*prox;
+};
+struct  ptr*inicio;
+struct ptr* criar_lista(struct ptr* aux,struct ptr* inicio,struct ptr* fim);
+void mostra(struct ptr* aux);
+main(){
+	inicio=(struct ptr*)NULL;
+	inicio=criar_lista(inicio,inicio,inicio);
+	mostra(inicio);
+}
+struct ptr* criar_lista(struct ptr* aux,struct ptr*inicio,struct ptr* fim){
+	int valor;
+	printf("Entre com um valor:\t");
+	scanf("%d",&valor);
+	if(valor>=0){
+		if(inicio==(struct ptr*)NULL){
+			inicio=(struct ptr *)malloc(sizeof(struct ptr));
+			inicio->valor=valor;
+			fim=inicio;
+		}
+		else{
+			aux=(struct ptr*)malloc(sizeof(struct ptr));
+			aux->valor=valor;
+			aux->prox=inicio;
+			inicio=aux;
+			fim->prox=inicio;
+		}
+		aux=(struct ptr*)NULL;
+		inicio=criar_lista(aux,inicio,fim);
+		fim=(struct ptr*)NULL;
+	}
+	return inicio;
+}
+void mostra(struct ptr* aux){
+	if(aux==(struct ptr*)NULL)
+		printf("\nLista Vazia");
+	else{
+		if(aux->prox!=inicio){
+			printf("%d\t",aux->valor);
+			mostra(aux->prox);
+		}
+		else
+			printf("%d\t",aux->valor);
+	}
+}
